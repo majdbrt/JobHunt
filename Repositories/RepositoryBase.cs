@@ -15,38 +15,43 @@ namespace JobHuntApi.Repositories
         {
             this._jobHuntApiDbContext = jobHuntApiDbContext;
         }
-
-        public async Task CreateAsync(T entity)
+        /*
+                public async Task CreateAsync(T entity)
+                {
+                    await _jobHuntApiDbContext.AddAsync(entity);
+                    await SaveAsync();
+                }
+        */
+        public async Task<bool> DeleteAsync(String id)
         {
-            await _jobHuntApiDbContext.AddAsync(entity);
-            await SaveAsync();
-        }
-
-        public async Task DeleteAsync(T entity)
-        {
+            var entity = await _jobHuntApiDbContext.Set<T>().FindAsync(id);
+            if (entity == null)
+                return false;
             _jobHuntApiDbContext.Remove(entity);
             await SaveAsync();
+            return true;
         }
+        /*
+                public async Task<IEnumerable<T>> GetAllAsync()
+                {
+                    return await _jobHuntApiDbContext.Set<T>().ToListAsync();
+                }
 
-        public async Task<IEnumerable<T>> GetAllAsync()
-        {
-            return await _jobHuntApiDbContext.Set<T>().ToListAsync();
-        }
-
-        public async Task<T?> GetByIdAsync(string id)
-        {
-            return await _jobHuntApiDbContext.Set<T>().FindAsync(id);
-        }
-
+                public async Task<T?> GetByIdAsync(string id)
+                {
+                    return await _jobHuntApiDbContext.Set<T>().FindAsync(id);
+                }
+        */
         public async Task SaveAsync()
         {
             await _jobHuntApiDbContext.SaveChangesAsync();
         }
-
-        public async Task UpdateAsync(T entity)
-        {
-            _jobHuntApiDbContext.Update(entity);
-            await SaveAsync();
-        }
+        /*
+                public async Task UpdateAsync(T entity)
+                {
+                    _jobHuntApiDbContext.Update(entity);
+                    await SaveAsync();
+                }
+                */
     }
 }

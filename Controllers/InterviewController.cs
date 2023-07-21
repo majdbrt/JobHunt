@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using JobHuntApi.Models;
+using JobHuntApi.Contracts;
+using JobHuntApi.DTO.Interview;
 
 namespace JobHuntApi.Controllers
 {
@@ -13,68 +15,51 @@ namespace JobHuntApi.Controllers
     [ApiController]
     public class InterviewController : ControllerBase
     {
-        private readonly JobHuntApiDbContext _context;
+        private readonly IInterviewRepository _interviewRepository;
 
-        public InterviewController(JobHuntApiDbContext context)
+        public InterviewController(IInterviewRepository interviewRepository)
         {
-            _context = context;
+            this._interviewRepository = interviewRepository;
         }
 
         // GET: api/Interview
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Interview>>> GetInterviews()
+        public async Task<ActionResult<IEnumerable<GetInterviewDto>>> GetInterviews()
         {
-          if (_context.Interviews == null)
-          {
-              return NotFound();
-          }
-            return await _context.Interviews.ToListAsync();
+            return Ok(await _interviewRepository.GetAllAsync());
         }
 
         // GET: api/Interview/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Interview>> GetInterview(string id)
+        public async Task<ActionResult<GetInterviewDto>> GetInterview(string id)
         {
-          if (_context.Interviews == null)
-          {
-              return NotFound();
-          }
-            var interview = await _context.Interviews.FindAsync(id);
-
+            var interview = await _interviewRepository.GetByIdAsync(id);
             if (interview == null)
             {
                 return NotFound();
             }
 
-            return interview;
+            return Ok(interview);
         }
 
         // PUT: api/Interview/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutInterview(string id, Interview interview)
+        public async Task<IActionResult> PutInterview(string id, UpdateInterviewDto updateInterviewDto)
         {
-            if (id != interview.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(interview).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!InterviewExists(id))
+                // Check if id corresponds to an interview
+                bool isUpdated = await _interviewRepository.UpdateAsync(id, updateInterviewDto);
+                if (!isUpdated)
                 {
                     return NotFound();
                 }
-                else
-                {
-                    throw;
-                }
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return NotFound();
+
             }
 
             return NoContent();
@@ -83,41 +68,34 @@ namespace JobHuntApi.Controllers
         // POST: api/Interview
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Interview>> PostInterview(Interview interview)
+        public async Task<ActionResult<String>> PostInterview(CreateInterviewDto createInterviewDto)
         {
-          if (_context.Interviews == null)
-          {
-              return Problem("Entity set 'JobHuntApiDbContext.Interviews'  is null.");
-          }
-            _context.Interviews.Add(interview);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetInterview", new { id = interview.Id }, interview);
+            // Return id of newly created Intervew object
+            return Ok(await _interviewRepository.CreateAsync(createInterviewDto));
         }
 
         // DELETE: api/Interview/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteInterview(string id)
         {
-            if (_context.Interviews == null)
+            try
             {
+                // Check if id corresponds to an interview
+                bool isDeleted = await _interviewRepository.DeleteAsync(id);
+                if (!isDeleted)
+                    return NotFound();
+            }
+            catch
+            {
+                // Trying to delete record that doesn't exist
                 return NotFound();
             }
-            var interview = await _context.Interviews.FindAsync(id);
-            if (interview == null)
-            {
-                return NotFound();
-            }
-
-            _context.Interviews.Remove(interview);
-            await _context.SaveChangesAsync();
-
             return NoContent();
         }
 
-        private bool InterviewExists(string id)
+        private async Task<bool> InterviewExists(string id)
         {
-            return (_context.Interviews?.Any(e => e.Id == id)).GetValueOrDefault();
+            return await _interviewRepository.GetByIdAsync(id) != null;
         }
     }
 }

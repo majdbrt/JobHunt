@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using JobHuntApi.Models;
 using JobHuntApi.Contracts;
+using JobHuntApi.DTO.Application;
 
 namespace JobHuntApi.Controllers
 {
@@ -9,70 +10,48 @@ namespace JobHuntApi.Controllers
     [ApiController]
     public class ApplicationController : ControllerBase
     {
-        private readonly JobHuntApiDbContext _context;
-        private readonly IApplicationRepository applicationRepository;
+        private readonly IApplicationRepository _applicationRepository;
 
-        public ApplicationController(JobHuntApiDbContext context, IApplicationRepository applicationRepository)
+        public ApplicationController(IApplicationRepository applicationRepository)
         {
-            this.applicationRepository = applicationRepository;
-            _context = context;
+            this._applicationRepository = applicationRepository;
         }
 
         // GET: api/Application
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Application>>> GetApplications()
+        public async Task<ActionResult<IEnumerable<GetApplicationDto>>> GetApplications()
         {
-          if (_context.Applications == null)
-          {
-              return NotFound();
-          }
-            return await _context.Applications.ToListAsync();
+            return Ok(await _applicationRepository.GetAllAsync());
         }
 
         // GET: api/Application/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Application>> GetApplication(string id)
+        public async Task<ActionResult<GetApplicationDto>> GetApplication(string id)
         {
-          if (_context.Applications == null)
-          {
-              return NotFound();
-          }
-            var application = await _context.Applications.FindAsync(id);
+
+            var application = await _applicationRepository.GetByIdAsync(id);
 
             if (application == null)
             {
                 return NotFound();
             }
 
-            return application;
+            return Ok(application);
         }
 
         // PUT: api/Application/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutApplication(string id, Application application)
+        public async Task<IActionResult> PutApplication(string id, UpdateApplicationDto updateApplicationDto)
         {
-            if (id != application.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(application).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ApplicationExists(id))
-                {
+                // Check if id corresponds to an application
+                bool isUpdated = await _applicationRepository.UpdateAsync(id, updateApplicationDto);
+                if (!isUpdated)
                     return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+            } catch (DbUpdateConcurrencyException){
+                return NotFound();
             }
 
             return NoContent();
@@ -81,41 +60,28 @@ namespace JobHuntApi.Controllers
         // POST: api/Application
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Application>> PostApplication(Application application)
+        public async Task<ActionResult<String>> PostApplication(CreateApplicationDto createApplicationDto)
         {
-          if (_context.Applications == null)
-          {
-              return Problem("Entity set 'JobHuntApiDbContext.Applications'  is null.");
-          }
-            _context.Applications.Add(application);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetApplication", new { id = application.Id }, application);
+            // Return id of newly created application
+            return Ok(await _applicationRepository.CreateAsync(createApplicationDto));
         }
 
         // DELETE: api/Application/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteApplication(string id)
         {
-            if (_context.Applications == null)
+            bool isDeleted = await _applicationRepository.DeleteAsync(id);
+            if (!isDeleted)
             {
                 return NotFound();
             }
-            var application = await _context.Applications.FindAsync(id);
-            if (application == null)
-            {
-                return NotFound();
-            }
-
-            _context.Applications.Remove(application);
-            await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool ApplicationExists(string id)
+        private async Task<bool> ApplicationExists(string id)
         {
-            return (_context.Applications?.Any(e => e.Id == id)).GetValueOrDefault();
+            return await _applicationRepository.GetByIdAsync(id) != null;
         }
     }
 }
