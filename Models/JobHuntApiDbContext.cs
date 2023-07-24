@@ -17,6 +17,7 @@ namespace JobHuntApi.Models
                 .WithOne(e => e.Application)
                 .HasForeignKey(e => e.ApplicationId)
                 .IsRequired();
+
         }
         public DbSet<Application> Applications { get; set; }
         public DbSet<Interview> Interviews { get; set; }

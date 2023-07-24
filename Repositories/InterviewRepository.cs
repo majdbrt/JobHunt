@@ -19,6 +19,8 @@ namespace JobHuntApi.Repositories
         public async Task<String> CreateAsync(CreateInterviewDto createInterviewDto)
         {
             var interview = _mapper.Map<Interview>(createInterviewDto);
+            interview.CreatedAt = DateTime.UtcNow;
+            interview.UpdatedAt = DateTime.UtcNow;
             await _jobHuntApiDbContext.AddAsync(interview);
             await SaveAsync();
             return interview.Id;
@@ -44,6 +46,7 @@ namespace JobHuntApi.Repositories
             if (interview == null)
                 return false;
             _mapper.Map(updateInterviewDto, interview);
+            interview.UpdatedAt = DateTime.UtcNow;
             _jobHuntApiDbContext.Update(interview);
             await SaveAsync();
             return true;

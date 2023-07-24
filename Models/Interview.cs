@@ -13,7 +13,6 @@ namespace JobHuntApi.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public required String Id { get; set; }
         public String? Notes { get; set; }
-        public int MyProperty { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
         public DateOnly DateSubmitted { get; set; }

@@ -12,8 +12,7 @@ namespace JobHuntApi.Models
         public required String Company { get; set; }
         [Required]
         public required String JobTitle { get; set; }
-        [Required]
-        public required String JobDescription { get; set; }
+        public String? JobDescription { get; set; }
         public String? Compensation { get; set; }
         public String? ReferralName { get; set; }
         public DateTime CreatedAt { get; set ; }

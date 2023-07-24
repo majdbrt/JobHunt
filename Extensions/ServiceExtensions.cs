@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using JobHuntApi.Contracts;
+using JobHuntApi.Models;
 using JobHuntApi.Repositories;
 using Microsoft.EntityFrameworkCore;
 namespace JobHuntApi.Extensions
@@ -28,14 +29,19 @@ namespace JobHuntApi.Extensions
         }
 
         public static void ConfigureDB(this IServiceCollection services){
-            services.AddDbContext<DbContext>(options => {
-                options.UseNpgsql(System.Environment.GetEnvironmentVariable("CONNECTION_STRING"));
+            services.AddDbContext<JobHuntApiDbContext>(options => {
+                String? connectionString = System.Environment.GetEnvironmentVariable("CONNECTION_STRING");
+                if(connectionString == null){
+                    throw new NullReferenceException(connectionString);
+                }
+                options.UseNpgsql(connectionString);
             });
         }
 
         public static void AddDependencyInjection(this IServiceCollection services){
-            services.AddScoped(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
-            services.AddScoped<IApplicationRepository, ApplicationRepository>();
+           services.AddScoped(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
+           services.AddScoped<IApplicationRepository, ApplicationRepository>();
+           services.AddScoped<IInterviewRepository, InterviewRepository>();
         }
 
 

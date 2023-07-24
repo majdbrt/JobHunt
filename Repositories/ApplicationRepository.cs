@@ -24,7 +24,10 @@ namespace JobHuntApi.Repositories
         public async Task<String> CreateAsync(CreateApplicationDto createApplicationDto)
         {
             var application = _mapper.Map<Application>(createApplicationDto);
+            application.CreatedAt = DateTime.UtcNow;
+            application.UpdatedAt = DateTime.UtcNow;
             await _jobHuntApiDbContext.AddAsync(application);
+
             await SaveAsync();
             return application.Id;
 
@@ -49,6 +52,7 @@ namespace JobHuntApi.Repositories
             if (application == null)
                 return false;
             _mapper.Map(updateApplicationDto, application);
+            application.UpdatedAt = DateTime.UtcNow;
             _jobHuntApiDbContext.Update(application);
             await SaveAsync();
             return true;

@@ -1,3 +1,4 @@
+using JobHuntApi.Configuration;
 using JobHuntApi.Contracts;
 using JobHuntApi.Extensions;
 using JobHuntApi.Repositories;
@@ -27,6 +28,9 @@ builder.Services.ConfigureIISIntegration();
 
 builder.Services.AddDependencyInjection();
 
+builder.Services.AddAutoMapper(typeof(AutoMapperConfiguration));
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -38,11 +42,12 @@ if (app.Environment.IsDevelopment())
 else
     app.UseHsts();
 
-app.UseHttpsRedirection();
-app.UseStaticFiles();
-app.UseForwardedHeaders(new ForwardedHeadersOptions{
-    ForwardedHeaders = ForwardedHeaders.All
-});
+// app.UseHttpsRedirection();
+// app.UseStaticFiles();
+// app.UseForwardedHeaders(new ForwardedHeadersOptions
+// {
+//     ForwardedHeaders = ForwardedHeaders.All
+// });
 app.UseCors("Policy");
 
 app.UseAuthorization();

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\barakat.m.4\\Downloads\\learning\\Web\\C# projects\\JobHuntApi\\JobHuntApi.csproj": {}
+    "C:\\Users\\barakat.m.4\\Downloads\\learning\\Web\\C# projects\\JobHuntApi\\JobHuntApi.csproj": {}
   },
   "projects": {
-    "c:\\Users\\barakat.m.4\\Downloads\\learning\\Web\\C# projects\\JobHuntApi\\JobHuntApi.csproj": {
+    "C:\\Users\\barakat.m.4\\Downloads\\learning\\Web\\C# projects\\JobHuntApi\\JobHuntApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\barakat.m.4\\Downloads\\learning\\Web\\C# projects\\JobHuntApi\\JobHuntApi.csproj",
+        "projectUniqueName": "C:\\Users\\barakat.m.4\\Downloads\\learning\\Web\\C# projects\\JobHuntApi\\JobHuntApi.csproj",
         "projectName": "JobHuntApi",
-        "projectPath": "c:\\Users\\barakat.m.4\\Downloads\\learning\\Web\\C# projects\\JobHuntApi\\JobHuntApi.csproj",
+        "projectPath": "C:\\Users\\barakat.m.4\\Downloads\\learning\\Web\\C# projects\\JobHuntApi\\JobHuntApi.csproj",
         "packagesPath": "C:\\Users\\barakat.m.4\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\barakat.m.4\\Downloads\\learning\\Web\\C# projects\\JobHuntApi\\obj\\",
+        "outputPath": "C:\\Users\\barakat.m.4\\Downloads\\learning\\Web\\C# projects\\JobHuntApi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\barakat.m.4\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -39,6 +39,10 @@
           "targetAlias": "net7.0",
           "dependencies": {
             "AutoMapper": {
+              "target": "Package",
+              "version": "[12.0.1, )"
+            },
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
               "version": "[12.0.1, )"
             },

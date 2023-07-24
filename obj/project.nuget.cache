@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "O5Nwmmfxrwjs8GnrzV++iQM2V8PpIAu+A54u3+g12rLAIBNiSeif1gxKcc1QnYkIalbEt+qSPWts1GzyK2hchQ==",
+  "dgSpecHash": "NkwbKdMqf06ra79lS38qfndBxbbp5PXrgrfpx8uDR/5dAlJIEdVw2SCqfR6ul3oJFgb2xaxMz6cNj9RJj+uQ0A==",
   "success": true,
-  "projectFilePath": "c:\\Users\\barakat.m.4\\Downloads\\learning\\Web\\C# projects\\JobHuntApi\\JobHuntApi.csproj",
+  "projectFilePath": "C:\\Users\\barakat.m.4\\Downloads\\learning\\Web\\C# projects\\JobHuntApi\\JobHuntApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\barakat.m.4\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
+    "C:\\Users\\barakat.m.4\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "C:\\Users\\barakat.m.4\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\barakat.m.4\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
     "C:\\Users\\barakat.m.4\\.nuget\\packages\\dotnetenv\\2.5.0\\dotnetenv.2.5.0.nupkg.sha512",
