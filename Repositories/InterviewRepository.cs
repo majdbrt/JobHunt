@@ -16,7 +16,7 @@ namespace JobHuntApi.Repositories
             this._jobHuntApiDbContext = jobHuntApiDbContext;
         }
 
-        public async Task<String> CreateAsync(CreateInterviewDto createInterviewDto)
+        public async Task<string> CreateAsync(CreateInterviewDto createInterviewDto)
         {
             var interview = _mapper.Map<Interview>(createInterviewDto);
             interview.CreatedAt = DateTime.UtcNow;

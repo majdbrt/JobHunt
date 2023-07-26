@@ -3,11 +3,13 @@ using Microsoft.EntityFrameworkCore;
 using JobHuntApi.Models;
 using JobHuntApi.Contracts;
 using JobHuntApi.DTO.Application;
+using Microsoft.AspNetCore.Authorization;
 
 namespace JobHuntApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ApplicationController : ControllerBase
     {
         private readonly IApplicationRepository _applicationRepository;
@@ -60,7 +62,7 @@ namespace JobHuntApi.Controllers
         // POST: api/Application
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<String>> PostApplication(CreateApplicationDto createApplicationDto)
+        public async Task<ActionResult<string>> PostApplication(CreateApplicationDto createApplicationDto)
         {
             // Return id of newly created application
             return Ok(await _applicationRepository.CreateAsync(createApplicationDto));

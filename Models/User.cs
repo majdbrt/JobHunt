@@ -11,6 +11,7 @@ namespace JobHuntApi.Models
         public required String LastName { get; set; }
         [Required]
         public required String Gender { get; set; }
+        public string? RefreshToken { get; set; }
         
     }
 }

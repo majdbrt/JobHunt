@@ -33,6 +33,9 @@ builder.Services.AddAutoMapper(typeof(AutoMapperConfiguration));
 // Add Authentication and configure password requirements
 builder.Services.ConfigureIdentity();
 
+// Add jwt validation configurations
+builder.Services.ConfigureJWT();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

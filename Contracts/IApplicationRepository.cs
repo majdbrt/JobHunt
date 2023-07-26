@@ -6,8 +6,8 @@ namespace JobHuntApi.Contracts
     public interface IApplicationRepository : IRepositoryBase<Application>
     {
         Task<IEnumerable<GetApplicationDto>> GetAllAsync();
-        Task<GetApplicationDto?> GetByIdAsync(String id);
-        Task<String> CreateAsync(CreateApplicationDto createApplicationDto);
-        Task<bool> UpdateAsync(String id, UpdateApplicationDto updateApplicationDto);
+        Task<GetApplicationDto?> GetByIdAsync(string id);
+        Task<string> CreateAsync(CreateApplicationDto createApplicationDto);
+        Task<bool> UpdateAsync(string id, UpdateApplicationDto updateApplicationDto);
     }
 }

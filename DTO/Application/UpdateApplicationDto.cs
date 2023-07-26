@@ -2,13 +2,13 @@ namespace JobHuntApi.DTO.Application
 {
     public class UpdateApplicationDto
     {
-        public String? Company { get; set; }
-        public String? JobTitle { get; set; }
-        public String? JobDescription { get; set; }
-        public String? Compensation { get; set; }
-        public String? ReferralName { get; set; }
+        public string? Company { get; set; }
+        public string? JobTitle { get; set; }
+        public string? JobDescription { get; set; }
+        public string? Compensation { get; set; }
+        public string? ReferralName { get; set; }
         public DateOnly DateSubmitted { get; set; }
-        public String? Notes { get; set; }
-        public String? Status { get; set; }
+        public string? Notes { get; set; }
+        public string? Status { get; set; }
     }
 }

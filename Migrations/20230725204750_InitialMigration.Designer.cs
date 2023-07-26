@@ -3,6 +3,7 @@ using System;
 using JobHuntApi.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace JobHuntApi.Migrations
 {
     [DbContext(typeof(JobHuntApiDbContext))]
-    partial class JobHuntApiDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230725204750_InitialMigration")]
+    partial class InitialMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -148,9 +151,6 @@ namespace JobHuntApi.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("boolean");
 
-                    b.Property<string>("RefreshToken")
-                        .HasColumnType("text");
-
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("text");
 
@@ -201,13 +201,13 @@ namespace JobHuntApi.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "e8f5de9d-b4cf-4732-be7e-d5944abb43e2",
+                            Id = "983fc3ac-d3b9-4ae9-9732-4a9bdfd64b4b",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "09ca2cd9-c5e6-42df-badd-aeef81fccc74",
+                            Id = "f4e64f72-d297-4347-9b76-176ab589f86b",
                             Name = "User",
                             NormalizedName = "USER"
                         });

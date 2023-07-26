@@ -21,7 +21,7 @@ namespace JobHuntApi.Repositories
             this._jobHuntApiDbContext = jobHuntApiDbContext;
         }
 
-        public async Task<String> CreateAsync(CreateApplicationDto createApplicationDto)
+        public async Task<string> CreateAsync(CreateApplicationDto createApplicationDto)
         {
             var application = _mapper.Map<Application>(createApplicationDto);
             application.CreatedAt = DateTime.UtcNow;

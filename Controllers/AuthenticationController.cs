@@ -34,5 +34,16 @@ namespace JobHuntApi.Controllers
 
             return Ok(result);
         }
+
+        [HttpPost]
+        [Route("login")]
+        public async Task<ActionResult<GetUserDto>> Login([FromBody] LoginUserDto loginUserDto){
+            GetUserDto? getUserDto = await _authenticationRepository.ValidateUserAsync(loginUserDto);
+
+            if (getUserDto == null)
+                return Unauthorized();
+
+            return Ok(getUserDto);
+        }
     }
 }

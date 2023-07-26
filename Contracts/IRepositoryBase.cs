@@ -9,11 +9,11 @@ namespace JobHuntApi.Contracts
     {
         /*
         Task<IEnumerable<T>> GetAllAsync();
-        Task<T?> GetByIdAsync(String id);
+        Task<T?> GetByIdAsync(string id);
         Task CreateAsync(T entity);
         Task UpdateAsync(T entity);
         */
-        Task<bool> DeleteAsync(String id);
+        Task<bool> DeleteAsync(string id);
 
         Task SaveAsync();
     }

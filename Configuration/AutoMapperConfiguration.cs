@@ -20,6 +20,8 @@ namespace JobHuntApi.Configuration
             CreateMap<Interview, CreateInterviewDto>().ReverseMap();
 
             CreateMap<User, RegisterUserDto>().ReverseMap();
+            CreateMap<User, GetUserDto>().ReverseMap();
+            CreateMap<User, LoginUserDto>().ReverseMap();
         }
     }
 }

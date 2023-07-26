@@ -8,11 +8,13 @@ using Microsoft.EntityFrameworkCore;
 using JobHuntApi.Models;
 using JobHuntApi.Contracts;
 using JobHuntApi.DTO.Interview;
+using Microsoft.AspNetCore.Authorization;
 
 namespace JobHuntApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class InterviewController : ControllerBase
     {
         private readonly IInterviewRepository _interviewRepository;
@@ -68,7 +70,7 @@ namespace JobHuntApi.Controllers
         // POST: api/Interview
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<String>> PostInterview(CreateInterviewDto createInterviewDto)
+        public async Task<ActionResult<string>> PostInterview(CreateInterviewDto createInterviewDto)
         {
             // Return id of newly created Intervew object
             return Ok(await _interviewRepository.CreateAsync(createInterviewDto));

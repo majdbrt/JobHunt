@@ -22,7 +22,7 @@ namespace JobHuntApi.Repositories
                     await SaveAsync();
                 }
         */
-        public async Task<bool> DeleteAsync(String id)
+        public async Task<bool> DeleteAsync(string id)
         {
             var entity = await _jobHuntApiDbContext.Set<T>().FindAsync(id);
             if (entity == null)

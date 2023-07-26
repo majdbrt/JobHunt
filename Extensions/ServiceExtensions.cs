@@ -1,12 +1,16 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using JobHuntApi.Contracts;
 using JobHuntApi.Models;
 using JobHuntApi.Repositories;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+
 namespace JobHuntApi.Extensions
 {
     public static class ServiceExtensions
@@ -56,7 +60,6 @@ namespace JobHuntApi.Extensions
 
         public static void ConfigureIdentity(this IServiceCollection services)
         {
-            services.AddAuthentication();
             services.AddIdentity<User, IdentityRole>(options =>
             {
                 options.Password.RequireDigit = true;
@@ -67,6 +70,39 @@ namespace JobHuntApi.Extensions
             })
             .AddEntityFrameworkStores<JobHuntApiDbContext>()
             .AddDefaultTokenProviders();
+        }
+
+        public static void ConfigureJWT(this IServiceCollection services)
+        {
+            String? validIssuer = System.Environment.GetEnvironmentVariable("JWT_VALID_ISSUER");
+            String? validAudience = System.Environment.GetEnvironmentVariable("JWT_VALID_AUDIENCE");
+            String? secret = System.Environment.GetEnvironmentVariable("JWT_SECRET");
+
+            if (secret == null)
+            {
+                throw new NullReferenceException(secret);
+            }
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+
+                    ValidIssuer = validIssuer,
+                    ValidAudience = validAudience,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret))
+                };
+            });
+
         }
     }
 }

@@ -11,14 +11,14 @@ namespace JobHuntApi.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public required String Id { get; set; }
-        public String? Notes { get; set; }
+        public required string Id { get; set; }
+        public string? Notes { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
         public DateOnly DateSubmitted { get; set; }
 
         [Required]
-        public required String ApplicationId { get; set; }
+        public required string ApplicationId { get; set; }
         public virtual Application Application { get; set; } = null!;
     }
 }

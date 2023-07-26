@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "rMeyvY8RWkXuVIbcs4PxlXRQk1NQVh7/GUbE/HKzp+JHbXiqngG6b1tpTBbxH0cWIO3g15UaWpfjI97uzViZDA==",
+  "dgSpecHash": "VWZwPbLyu9q/W7rlQ3X4qakuIobVmWlC24QOzt8SxtVKjCzJRkSrGNK4IKIC4wCTCLZ2Rr+KvlTS7E+1hE7tdw==",
   "success": true,
   "projectFilePath": "C:\\Users\\barakat.m.4\\Downloads\\learning\\Web\\C# projects\\JobHuntApi\\JobHuntApi.csproj",
   "expectedPackageFiles": [
@@ -59,6 +59,7 @@
     "C:\\Users\\barakat.m.4\\.nuget\\packages\\humanizer.core.zh-cn\\2.14.1\\humanizer.core.zh-cn.2.14.1.nupkg.sha512",
     "C:\\Users\\barakat.m.4\\.nuget\\packages\\humanizer.core.zh-hans\\2.14.1\\humanizer.core.zh-hans.2.14.1.nupkg.sha512",
     "C:\\Users\\barakat.m.4\\.nuget\\packages\\humanizer.core.zh-hant\\2.14.1\\humanizer.core.zh-hant.2.14.1.nupkg.sha512",
+    "C:\\Users\\barakat.m.4\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\7.0.9\\microsoft.aspnetcore.authentication.jwtbearer.7.0.9.nupkg.sha512",
     "C:\\Users\\barakat.m.4\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\7.0.9\\microsoft.aspnetcore.cryptography.internal.7.0.9.nupkg.sha512",
     "C:\\Users\\barakat.m.4\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\7.0.9\\microsoft.aspnetcore.cryptography.keyderivation.7.0.9.nupkg.sha512",
     "C:\\Users\\barakat.m.4\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\7.0.9\\microsoft.aspnetcore.identity.entityframeworkcore.7.0.9.nupkg.sha512",
