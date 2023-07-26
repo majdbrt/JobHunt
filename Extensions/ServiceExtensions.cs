@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using JobHuntApi.Contracts;
 using JobHuntApi.Models;
 using JobHuntApi.Repositories;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 namespace JobHuntApi.Extensions
 {
@@ -13,37 +14,59 @@ namespace JobHuntApi.Extensions
 
         public static void ConfigureCors(this IServiceCollection services)
         {
-            services.AddCors(options => {
-                options.AddPolicy("Policy", builder => {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("Policy", builder =>
+                {
                     builder.WithOrigins("https://localhost:3000")
                         .AllowAnyHeader()
-                        .AllowAnyMethod();   
-                }); 
+                        .AllowAnyMethod();
+                });
             });
         }
 
-        public static void ConfigureIISIntegration(this IServiceCollection services){
+        public static void ConfigureIISIntegration(this IServiceCollection services)
+        {
             // use default properties
-            services.Configure<IISOptions>(options => {    
+            services.Configure<IISOptions>(options =>
+            {
             });
         }
 
-        public static void ConfigureDB(this IServiceCollection services){
-            services.AddDbContext<JobHuntApiDbContext>(options => {
+        public static void ConfigureDB(this IServiceCollection services)
+        {
+            services.AddDbContext<JobHuntApiDbContext>(options =>
+            {
                 String? connectionString = System.Environment.GetEnvironmentVariable("CONNECTION_STRING");
-                if(connectionString == null){
+                if (connectionString == null)
+                {
                     throw new NullReferenceException(connectionString);
                 }
                 options.UseNpgsql(connectionString);
             });
         }
 
-        public static void AddDependencyInjection(this IServiceCollection services){
-           services.AddScoped(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
-           services.AddScoped<IApplicationRepository, ApplicationRepository>();
-           services.AddScoped<IInterviewRepository, InterviewRepository>();
+        public static void AddDependencyInjection(this IServiceCollection services)
+        {
+            services.AddScoped(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
+            services.AddScoped<IApplicationRepository, ApplicationRepository>();
+            services.AddScoped<IInterviewRepository, InterviewRepository>();
+            services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();
         }
 
+        public static void ConfigureIdentity(this IServiceCollection services)
+        {
+            services.AddAuthentication();
+            services.AddIdentity<User, IdentityRole>(options =>
+            {
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequiredLength = 8;
 
+            })
+            .AddEntityFrameworkStores<JobHuntApiDbContext>()
+            .AddDefaultTokenProviders();
+        }
     }
 }

@@ -2,6 +2,7 @@ using System.Net.Mime;
 using AutoMapper;
 using JobHuntApi.DTO.Application;
 using JobHuntApi.DTO.Interview;
+using JobHuntApi.DTO.User;
 using JobHuntApi.Models;
 
 namespace JobHuntApi.Configuration
@@ -17,6 +18,8 @@ namespace JobHuntApi.Configuration
             CreateMap<Interview, GetInterviewDto>().ReverseMap();
             CreateMap<Interview, UpdateInterviewDto>().ReverseMap();
             CreateMap<Interview, CreateInterviewDto>().ReverseMap();
+
+            CreateMap<User, RegisterUserDto>().ReverseMap();
         }
     }
 }

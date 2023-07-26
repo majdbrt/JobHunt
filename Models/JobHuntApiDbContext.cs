@@ -1,9 +1,10 @@
-using System;
+using JobHuntApi.Models.Configuration;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace JobHuntApi.Models
 {
-    public class JobHuntApiDbContext : DbContext
+    public class JobHuntApiDbContext : IdentityDbContext<User>
     {
         public JobHuntApiDbContext(DbContextOptions options) : base(options)
         {
@@ -11,7 +12,8 @@ namespace JobHuntApi.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
+            modelBuilder.ApplyConfiguration(new RoleConfiguration());
+            
             modelBuilder.Entity<Application>()
                 .HasMany(e => e.Interviews)
                 .WithOne(e => e.Application)

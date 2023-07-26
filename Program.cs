@@ -30,6 +30,8 @@ builder.Services.AddDependencyInjection();
 
 builder.Services.AddAutoMapper(typeof(AutoMapperConfiguration));
 
+// Add Authentication and configure password requirements
+builder.Services.ConfigureIdentity();
 
 var app = builder.Build();
 
@@ -49,6 +51,8 @@ else
 //     ForwardedHeaders = ForwardedHeaders.All
 // });
 app.UseCors("Policy");
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
