@@ -1,9 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
+import { NeoButtonComponent } from '../neo-button/neo-button.component';
+
+
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
+  
+  
 })
 export class HeaderComponent {
 
@@ -11,21 +16,4 @@ export class HeaderComponent {
   deg: number = 0;
   private _setIntervalHandler: any;
 
-  enter(){
-    this._setIntervalHandler = setInterval(()=>{
-      this.deg += 1;
-    },1 )
-
-    
-  }
-
-  leave(){
-    clearInterval(this._setIntervalHandler);
-  }
-
-  ngOnDestroy() {
-    clearInterval(this._setIntervalHandler);
- }
-
-  
 }

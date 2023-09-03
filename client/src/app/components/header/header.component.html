@@ -1,5 +1,15 @@
-<div class="flex m-4">
-    <p class=" text-4xl my-auto font-bold px-2 text-yellow-900 ">{{title}}</p>
-    <img (mouseenter)="enter()" (mouseleave)="leave()" class="h-8 my-auto" [ngStyle]="{'transform': 'rotate('+this.deg +'deg)'}" src="assets/img/logo.png" alt="logo">
- 
+<div class="flex justify-between border-b-2 border-black text-xs md:text-lg">
+    <div routerLink="/" class="bg-violet-300 font-bold border-[1px] px-2 py-1 md:px-4 md:py-1 border-black cursor-pointer">
+        {{title}}
+    </div>
+
+    <div  class="">
+        <button routerLink="/signup" class=" border-[1px] px-2 py-1 md:px-4 md:py-1 border-black">
+            Sign up
+        </button>
+
+        <button routerLink="/login" class="bg-pink-300 border-[1px] px-2 py-1 md:px-4 md:py-1 border-black">
+            Sign in
+        </button>
+    </div>
 </div>
