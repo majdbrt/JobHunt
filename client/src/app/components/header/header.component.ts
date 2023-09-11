@@ -12,8 +12,15 @@ import { NeoButtonComponent } from '../neo-button/neo-button.component';
 })
 export class HeaderComponent {
 
-  title: string = "Job Hunt";
-  deg: number = 0;
-  private _setIntervalHandler: any;
+  menuVisible = false;
+
+  showMenu(){
+    if(this.menuVisible){
+      this.menuVisible = false
+    }
+    else{
+      this.menuVisible = true
+    }
+  }
 
 }

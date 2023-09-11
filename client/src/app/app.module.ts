@@ -9,6 +9,7 @@ import { NeoButtonComponent } from './components/neo-button/neo-button.component
 import { SignupComponent } from './pages/signup/signup.component';
 import { LandingComponent } from './pages/landing/landing.component';
 import { LoginComponent } from './pages/login/login.component';
+import { SignupFormComponent } from './components/signup-form/signup-form.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { LoginComponent } from './pages/login/login.component';
     NeoButtonComponent,
     SignupComponent,
     LandingComponent,
-    LoginComponent
+    LoginComponent,
+    SignupFormComponent
   ],
   imports: [
     BrowserModule,

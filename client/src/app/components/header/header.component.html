@@ -1,15 +1,27 @@
-<div class="flex justify-between border-b-2 border-black text-xs md:text-lg">
-    <div routerLink="/" class="bg-violet-300 font-bold border-[1px] px-2 py-1 md:px-4 md:py-1 border-black cursor-pointer">
-        {{title}}
-    </div>
+<div class="flex m-3 sm:mx-10 ">
+    <div routerLink="/" class=" font-bold  px-2 py-1 md:px-4 md:py-1 cursor-pointer">
+        Job <span class="text-emerald-400">Hunt</span></div>
 
-    <div  class="">
-        <button routerLink="/signup" class=" border-[1px] px-2 py-1 md:px-4 md:py-1 border-black">
+    <div class="hidden sm:block ml-auto">
+        <button routerLink="/signup" class="text-xs sm:text-sm px-2 py-1 md:px-4 md:py-1 ">
             Sign up
         </button>
 
-        <button routerLink="/login" class="bg-pink-300 border-[1px] px-2 py-1 md:px-4 md:py-1 border-black">
+        <button routerLink="/login" class="text-xs sm:text-sm px-2 py-1 md:px-4 md:py-1">
             Sign in
         </button>
     </div>
+    <div class="relative ml-auto my-auto ">
+        <img (click)="showMenu()" class="h-3  sm:hidden" src="assets/img/menu.png"/>
+        <div *ngIf="menuVisible" class="absolute z-50 backdrop-blur-sm right-0 font-medium top-5 whitespace-nowrap py-1  px-3  outline-slate-300 outline flex flex-col outline-1 rounded-lg">
+            <button routerLink="/signup" class=" my-2  ">
+                Sign up
+            </button>
+    
+            <button routerLink="/login" class=" my-2 ">
+                Sign in
+            </button>
+        </div> 
+    </div>
+    
 </div>
